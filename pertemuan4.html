@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="here"></p>
+    <script>
+      fetch("https://davidwalsh.name/flowers.jpg")
+        .then(function (response) {
+          return response.blob();
+        })
+        .then(function (imageBlob) {
+          document.querySelector("img").src = URL.createObjectURL(imageBlob);
+        });
+      // // Just getting XHR is a mess!
+      // if (window.XMLHttpRequest) {
+      //   // Mozilla, Safari, ...
+      //   request = new XMLHttpRequest();
+      // } else if (window.ActiveXObject) {
+      //   // IE
+      //   try {
+      //     request = new ActiveXObject("Msxml2.XMLHTTP");
+      //   } catch (e) {
+      //     try {
+      //       request = new ActiveXObject("Microsoft.XMLHTTP");
+      //     } catch (e) {}
+      //   }
+      // }
+
+      // // Open, send.
+      // request.open("GET", "https://davidwalsh.name/ajax-endpoint", true);
+      // request.send(null);
+
+      // fetch("https://reqres.in/api/users").then((respon) =>
+      //   console.log(respon)
+      // );
+
+      // fetch("https://reqres.in/api/users")
+      //   .then((res) => res.json())
+      //   .then((data) => console.log(data))
+      //   .catch(function (err) {
+      //     console.log("Terjadi Error!");
+      //   });
+
+      async function foo() {
+        let obj;
+        // const res = await fetch("https://reqres.in/api/users");
+        const res = await fetch("https://randomuser.me/api/?results=10");
+
+        obj = await res.json();
+        return obj;
+      }
+
+      // foo().then((data) => {
+      //   //console.log(data)
+      //   for (i = 0; i < data["data"].length; i++) {
+      //     document.getElementById("here").innerHTML +=
+      //       data["data"][i].first_name + " ";
+      //     document.getElementById("here").innerHTML +=
+      //       data["data"][i].last_name + " ";
+
+      //     document.getElementById("here").innerHTML +=
+      //       "<img src='" + data["data"][i].avatar + " '><br>";
+
+      //     console.log(data["data"][i].email);
+      //     console.log(data["data"][i].first_name);
+      //     console.log(data["data"][i].last_name);
+      //     console.log(data["data"][i].avatar);
+      //   }
+      // });
+
+      foo().then((data) => {
+        //console.log(data)
+        for (i = 0; i < data.results.length; i++) {
+          document.getElementById("here").innerHTML +=
+            data.results[i].name.first + " ";
+          document.getElementById("here").innerHTML +=
+            data.results[i].name.last + " ";
+
+          document.getElementById("here").innerHTML +=
+            "<img src='" + data.results[i].picture.medium + " '><br>";
+
+          // console.log(data["data"][i].email);
+          // console.log(data["data"][i].first_name);
+          // console.log(data["data"][i].last_name);
+          // console.log(data["data"][i].avatar.medium);
+        }
+      });
+    </script>
+  </body>
+</html>

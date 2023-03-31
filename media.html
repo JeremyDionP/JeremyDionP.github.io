@@ -25,9 +25,33 @@
           color: brown;
         }
       }
+      .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        background-color: darkblue;
+        /* flex-direction: column; */
+        flex-wrap: row wrap;
+        justify-content: space-around;
+        /* height: 300px; */
+        align-items: center;
+      }
+
+      .flex-container > div {
+        background-color: #f1f1f1;
+        width: 100px;
+        margin: 10px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 75px;
+      }
     </style>
   </head>
   <body>
     <h1>HELLO</h1>
+    <div class="flex-container">
+      <div style="flex-grow: 1">1</div>
+      <div style="flex-grow: 1">2</div>
+      <div style="flex-grow: 8">3</div>
+    </div>
   </body>
 </html>
